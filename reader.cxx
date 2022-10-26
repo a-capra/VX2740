@@ -26,6 +26,12 @@ void PrintWaveform(const std::vector<double>* wf)
       std::cout<<s<<std::endl;
 }
 
+void CSVWaveform(const std::vector<double>* wf)
+{
+   for(auto& s: *wf)
+      std::cout<<s<<",";
+   std::cout<<"\n";
+}
 void Unpack(TMEvent* midasevent)
 {
    if( midasevent->error ) // skip events with errors
@@ -73,8 +79,9 @@ void Unpack(TMEvent* midasevent)
                                      +channelData->GetChannelNumber());
                if( Verbose ) channelData->Print();
 
-               PrintWaveform( channelData->GetMeasurement() );
-	  
+               //PrintWaveform( channelData->GetMeasurement() );
+               CSVWaveform( channelData->GetMeasurement() );
+
             } // loop over channels
          delete raw;
       }// loop over boards
